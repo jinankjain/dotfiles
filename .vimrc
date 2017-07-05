@@ -1,9 +1,10 @@
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+set rtp+=/Users/turingmachine/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
 
 " Always show statusline
 set laststatus=2
 
 " General vim configuration
+set relativenumber
 set number
 set hlsearch
 syntax on
@@ -29,6 +30,12 @@ Plugin 'liuchengxu/space-vim-dark'
 Plugin 'rust-lang/rust.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'johngrib/vim-game-code-break'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'vim-scripts/nginx.vim'
+Plugin 'vim-scripts/vim-auto-save'
+Plugin 'vim-scripts/netrw.vim'
+Plugin 'spolu/dwm.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -70,5 +77,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Enable auto save mode
+let g:auto_save = 1 
 
 set mouse=a
