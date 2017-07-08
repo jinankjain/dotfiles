@@ -30,12 +30,21 @@ Plugin 'liuchengxu/space-vim-dark'
 Plugin 'rust-lang/rust.vim'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'johngrib/vim-game-code-break'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'fatih/vim-go'
 Plugin 'vim-scripts/nginx.vim'
-Plugin 'vim-scripts/vim-auto-save'
 Plugin 'vim-scripts/netrw.vim'
 Plugin 'spolu/dwm.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
+Plugin 'godlygeek/csapprox'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'mileszs/ack.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'thaerkh/vim-workspace'
 
 call vundle#end()
 filetype plugin indent on
@@ -79,6 +88,52 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 " Enable auto save mode
-let g:auto_save = 1 
+nnoremap <leader>s :ToggleWorkspace<CR>
+let g:workspace_autosave_always = 1
+
+" vim-go configuration
+let g:go_disable_autoinstall = 0
+
+" Highlight
+let g:go_highlight_functions = 1  
+let g:go_highlight_methods = 1  
+let g:go_highlight_structs = 1  
+let g:go_highlight_operators = 1  
+let g:go_highlight_build_constraints = 1  
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_width=26
+
+
+" go-tagbar configuration
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
+" Enable tag bar
+nmap <F8> :TagbarToggle<CR>
 
 set mouse=a
