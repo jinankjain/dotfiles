@@ -1,5 +1,3 @@
-set rtp+=/Users/turingmachine/Library/Python/2.7/lib/python/site-packages/powerline/bindings/vim
-
 " Always show statusline
 set laststatus=2
 
@@ -45,6 +43,11 @@ Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'thaerkh/vim-workspace'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'jaxbot/browserlink.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -65,6 +68,9 @@ cno jj <c-c>
 " For visual mode toggle
 vno v <esc>
 
+" Vim airline
+let g:airline#extensions#tabline#enabled = 1
+
 " Tab navigation
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
@@ -72,15 +78,10 @@ nnoremap tj  :tabprev<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
-"Moving tabs around to a specific number 
-nnoremap tm  :tabm<Space> 
+"Moving tabs around to a specific number
+nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 nnoremap to  :tabnew<Space>
-
-" Configuration for syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -95,11 +96,11 @@ let g:workspace_autosave_always = 1
 let g:go_disable_autoinstall = 0
 
 " Highlight
-let g:go_highlight_functions = 1  
-let g:go_highlight_methods = 1  
-let g:go_highlight_structs = 1  
-let g:go_highlight_operators = 1  
-let g:go_highlight_build_constraints = 1  
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26
 
@@ -136,4 +137,14 @@ let g:tagbar_type_go = {
 " Enable tag bar
 nmap <F8> :TagbarToggle<CR>
 
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Source vimrc without closing vim
+nnoremap <C-r> :source $MYVIMRC<CR>
+
 set mouse=a
+
+
