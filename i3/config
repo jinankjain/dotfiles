@@ -125,7 +125,29 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 
 # some of my custom configuration
+# i3lock shortcut
 bindsym $mod+Shift+P exec i3lock
+
+# Control screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
+# Custom script needs to be run on startup
+exec_always  ~/.config/i3/startup.sh
+
+# run unity-settings-daemon HACK for detecting external monitor
+exec_always unity-settings-daemon
+
+# launch nm-applet on start
+exec_always nm-applet
+
+# Sound control
+bindsym XF86AudioRaiseVolume exec pamixer -i 5
+bindsym XF86AudioLowerVolume exec pamixer -d 5
+bindsym XF86AudioMute exec pamixer -t
+bindsym $mod+F3 exec pamixer -i 5
+bindsym $mod+F2 exec pamixer -d 5
+bindsym $mod+F1 exec pamixer -t
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -156,6 +178,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command python3 ~/.config/i3/i3status_config.py
         tray_output primary
+        position top
 }
