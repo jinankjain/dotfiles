@@ -83,6 +83,15 @@ nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 nnoremap to  :tabnew<Space>
 
+" Buffer navigation
+nnoremap bj  :bfirst<CR>
+nnoremap bl  :bnext<CR>
+nnoremap bh  :bprev<CR>
+nnoremap bk  :blast<CR>
+nnoremap bn  :tabnext<Space>
+nnoremap bd  :bdelete<CR>
+nnoremap bo  :badd<Space>
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -101,7 +110,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_ctags_bin='/usr/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26
 
 
@@ -146,5 +155,4 @@ nnoremap <C-H> <C-W><C-H>
 nnoremap <C-r> :source $MYVIMRC<CR>
 
 set mouse=a
-
 
