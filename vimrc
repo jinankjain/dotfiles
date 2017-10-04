@@ -48,6 +48,8 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jaxbot/browserlink.vim'
+Plugin 'JamshedVesuna/vim-markdown-preview'
+Plugin 'hari-rangarajan/CCTree'
 
 call vundle#end()
 filetype plugin indent on
@@ -88,7 +90,7 @@ nnoremap bj  :bfirst<CR>
 nnoremap bl  :bnext<CR>
 nnoremap bh  :bprev<CR>
 nnoremap bk  :blast<CR>
-nnoremap bn  :tabnext<Space>
+nnoremap bn  :bnext<Space>
 nnoremap bd  :bdelete<CR>
 nnoremap bo  :badd<Space>
 
@@ -96,6 +98,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_c_include_dirs = [ '../include', 'include/', '../brimstone-api/brimstone', '/usr/include/glib-2.0' ]
 
 " Enable auto save mode
 nnoremap <leader>s :ToggleWorkspace<CR>
@@ -146,13 +149,23 @@ let g:tagbar_type_go = {
 " Enable tag bar
 nmap <F8> :TagbarToggle<CR>
 
+" Custom binding for split window
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+set splitbelow
+set splitright
+
 
 " Source vimrc without closing vim
 nnoremap <C-r> :source $MYVIMRC<CR>
 
 set mouse=a
 
+" Vim Markdown viwer
+let vim_markdown_preview_toggle=2
+let vim_markdown_preview_pandoc=1
+
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
