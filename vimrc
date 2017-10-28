@@ -18,6 +18,7 @@ filetype off
 
 " Set runtime path for Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=~/.fzf
 
 call vundle#begin()
 
@@ -48,8 +49,8 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'jaxbot/browserlink.vim'
-Plugin 'JamshedVesuna/vim-markdown-preview'
 Plugin 'hari-rangarajan/CCTree'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 
 call vundle#end()
 filetype plugin indent on
