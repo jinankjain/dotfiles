@@ -164,9 +164,5 @@ nnoremap <C-r> :source $MYVIMRC<CR>
 
 set mouse=a
 
-" Vim Markdown viwer
-let vim_markdown_preview_toggle=2
-let vim_markdown_preview_pandoc=1
-
 let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
