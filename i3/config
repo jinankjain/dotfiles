@@ -126,7 +126,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # some of my custom configuration
 # i3lock shortcut
-bindsym $mod+Shift+P exec i3lock
+bindsym $mod+Shift+P exec /usr/local/bin/lock/lock --
 
 # Control screen brightness
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
@@ -140,6 +140,8 @@ exec_always unity-settings-daemon
 
 # launch nm-applet on start
 exec_always nm-applet
+
+exec_always xrandr --dpi 130
 
 # Sound control
 bindsym XF86AudioRaiseVolume exec pamixer -i 5
