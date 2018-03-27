@@ -1,16 +1,17 @@
-" Always show statusline
-set laststatus=2
-
 " General vim configuration
+set laststatus=2
 set relativenumber
 set number
-set hlsearch
+" set hlsearch
+set incsearch
 syntax on
 filetype indent plugin on
 set tabstop=8
 set expandtab
 set softtabstop=4
 set shiftwidth=4
+
+set colorcolumn=81
 
 " Vundle configuration
 set nocompatible
@@ -26,31 +27,10 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'liuchengxu/space-vim-dark'
-Plugin 'rust-lang/rust.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'fatih/vim-go'
-Plugin 'vim-scripts/nginx.vim'
-Plugin 'vim-scripts/netrw.vim'
-Plugin 'spolu/dwm.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'gregsexton/gitv'
-Plugin 'godlygeek/csapprox'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'mileszs/ack.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/neocomplete'
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-Plugin 'thaerkh/vim-workspace'
-Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'jaxbot/browserlink.vim'
-Plugin 'hari-rangarajan/CCTree'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plugin 'zig-lang/zig.vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on
@@ -71,9 +51,6 @@ cno jj <c-c>
 " For visual mode toggle
 vno v <esc>
 
-" Vim airline
-let g:airline#extensions#tabline#enabled = 1
-
 " Tab navigation
 nnoremap th  :tabfirst<CR>
 nnoremap tk  :tabnext<CR>
@@ -87,65 +64,17 @@ nnoremap td  :tabclose<CR>
 nnoremap to  :tabnew<Space>
 
 " Buffer navigation
-nnoremap bj  :bfirst<CR>
-nnoremap bl  :bnext<CR>
-nnoremap bh  :bprev<CR>
-nnoremap bk  :blast<CR>
+nnoremap bh  :bfirst<CR>
+nnoremap bk  :bnext<CR>
+nnoremap bj  :bprev<CR>
+nnoremap bl  :blast<CR>
 nnoremap bn  :bnext<Space>
 nnoremap bd  :bdelete<CR>
 nnoremap bo  :badd<Space>
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_c_include_dirs = [ '../include', 'include/', '../brimstone-api/brimstone', '/usr/include/glib-2.0' ]
-
 " Enable auto save mode
 nnoremap <leader>s :ToggleWorkspace<CR>
 let g:workspace_autosave_always = 1
-
-" vim-go configuration
-let g:go_disable_autoinstall = 0
-
-" Highlight
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:tagbar_ctags_bin='/usr/bin/ctags'  " Proper Ctags locations
-let g:tagbar_width=26
-
-
-" go-tagbar configuration
-let g:tagbar_type_go = {
-	\ 'ctagstype' : 'go',
-	\ 'kinds'     : [
-		\ 'p:package',
-		\ 'i:imports:1',
-		\ 'c:constants',
-		\ 'v:variables',
-		\ 't:types',
-		\ 'n:interfaces',
-		\ 'w:fields',
-		\ 'e:embedded',
-		\ 'm:methods',
-		\ 'r:constructor',
-		\ 'f:functions'
-	\ ],
-	\ 'sro' : '.',
-	\ 'kind2scope' : {
-		\ 't' : 'ctype',
-		\ 'n' : 'ntype'
-	\ },
-	\ 'scope2kind' : {
-		\ 'ctype' : 't',
-		\ 'ntype' : 'n'
-	\ },
-	\ 'ctagsbin'  : 'gotags',
-	\ 'ctagsargs' : '-sort -silent'
-\ }
 
 " Enable tag bar
 nmap <F8> :TagbarToggle<CR>
@@ -160,9 +89,29 @@ set splitright
 
 
 " Source vimrc without closing vim
-nnoremap <C-r> :source $MYVIMRC<CR>
+nnoremap <C-m> :source $MYVIMRC<CR>
+nnoremap <C-o> :FZF<CR>
 
 set mouse=a
 
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
+let g:lightline = {
+      \ 'colorscheme': 'one',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
+" Use CTRL-S for saving, also in Insert mode
+noremap <C-S> :update<CR>
+vnoremap <C-S> <C-C>:update<CR>
+inoremap <C-S> <C-O>:update<CR>
+
+nnoremap ; :
+nnoremap : ;
+
+set list
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:★
