@@ -13,6 +13,9 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'w0rp/ale'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 call plug#end()
 
@@ -81,6 +84,13 @@ inoremap <C-S> <C-O>:update<CR>
 nnoremap ; :
 nnoremap : ;
 
+" end of line instead of $ which requires shift
+nmap 9 $
+" go the mark point
+nmap 8 `x
+" matching brackets/patterns
+nmap 5 %
+nmap v5 v%
 " Change esc to jj
 ino jj <esc>
 cno jj <c-c>
@@ -96,5 +106,10 @@ if has('autocmd')
     augroup END
 endif
 
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+if has('macunix')
+    let g:ycm_server_python_interpreter = '/usr/local/bin/python2'
+else
+    let g:ycm_server_python_interpreter = '/usr/bin/python2'
+endif
+
 let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
