@@ -54,7 +54,7 @@ nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 
-"Moving tabs around to a specific number
+" Moving tabs around to a specific number
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 nnoremap to  :tabnew<Space>
@@ -85,12 +85,14 @@ nnoremap ; :
 nnoremap : ;
 
 " end of line instead of $ which requires shift
-nmap 9 $
+nnoremap 9 $
+
 " go the mark point
-nmap 8 `x
+nnoremap 8 `x
+
 " matching brackets/patterns
-nmap 5 %
-nmap v5 v%
+nnoremap 5 %
+
 " Change esc to jj
 ino jj <esc>
 cno jj <c-c>
