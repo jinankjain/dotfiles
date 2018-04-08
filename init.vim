@@ -14,8 +14,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'Valloric/YouCompleteMe'
 Plug 'w0rp/ale'
 Plug 'tmhedberg/matchit'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -34,6 +36,7 @@ let g:lightline = {
 
 " General Configuration
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
+autocmd FileType go setlocal noexpandtab
 set laststatus=2
 set incsearch ignorecase smartcase
 set encoding=utf-8
@@ -92,6 +95,9 @@ nnoremap 8 `x
 
 " matching brackets/patterns
 nnoremap 5 %
+
+" simple comment code
+noremap <leader>/ :Commentary<cr>
 
 " Change esc to jj
 ino jj <esc>
