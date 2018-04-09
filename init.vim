@@ -18,13 +18,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'jacoborus/tender.vim'
 
 call plug#end()
 
-colorscheme space-vim-dark
+syntax enable
+colorscheme tender
 
 let g:lightline = {
-      \ 'colorscheme': 'one',
+      \ 'colorscheme': 'tender',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
