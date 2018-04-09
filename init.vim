@@ -50,10 +50,10 @@ syntax on
 filetype indent plugin on
 
 " Tab navigation
-nnoremap th  :tabfirst<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tl  :tablast<CR>
+nnoremap tj  :tabfirst<CR>
+nnoremap tl  :tabnext<CR>
+nnoremap th  :tabprev<CR>
+nnoremap tk  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
 
@@ -63,10 +63,10 @@ nnoremap td  :tabclose<CR>
 nnoremap to  :tabnew<Space>
 
 " Buffer navigation
-nnoremap bh  :bfirst<CR>
-nnoremap bk  :bnext<CR>
-nnoremap bj  :bprev<CR>
-nnoremap bl  :blast<CR>
+nnoremap bj  :bfirst<CR>
+nnoremap bl  :bnext<CR>
+nnoremap bh  :bprev<CR>
+nnoremap bk  :blast<CR>
 nnoremap bn  :bnext<Space>
 nnoremap bd  :bdelete<CR>
 nnoremap bo  :badd<Space>
