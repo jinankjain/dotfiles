@@ -16,7 +16,6 @@ Plug 'w0rp/ale'
 Plug 'tmhedberg/matchit'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'jacoborus/tender.vim'
 
