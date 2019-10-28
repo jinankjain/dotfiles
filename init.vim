@@ -6,38 +6,23 @@ set rtp+=~/.fzf
 
 call plug#begin()
 
-Plug 'zig-lang/zig.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'liuchengxu/space-vim-dark'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'tpope/vim-fugitive'
-Plug 'Valloric/YouCompleteMe'
-Plug 'w0rp/ale'
-Plug 'tmhedberg/matchit'
-Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'liuchengxu/space-vim-theme'
+Plug 'Yggdroot/indentLine'
+Plug 'bling/vim-bufferline'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'tpope/vim-commentary'
-Plug 'jacoborus/tender.vim'
+Plug 'skywind3000/gutentags_plus'
+Plug 'skywind3000/vim-preview'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'racer-rust/vim-racer'
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'w0rp/ale'
 
 call plug#end()
 
-syntax enable
-colorscheme tender
-
-let g:lightline = {
-      \ 'colorscheme': 'tender',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
-
-" General Configuration
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
-autocmd FileType go setlocal noexpandtab
 set laststatus=2
 set incsearch ignorecase smartcase
 set encoding=utf-8
@@ -80,11 +65,6 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-" Use CTRL-S for saving, also in Insert mode
-noremap <C-S> :update<CR>
-vnoremap <C-S> <C-C>:update<CR>
-inoremap <C-S> <C-O>:update<CR>
-
 nnoremap ; :
 nnoremap : ;
 
@@ -100,25 +80,70 @@ nnoremap 5 %
 " simple comment code
 noremap <leader>/ :Commentary<cr>
 
-" Change esc to jj
-ino jj <esc>
-cno jj <c-c>
-
 " Source vimrc without closing vim
 nnoremap <C-m> :source $MYVIMRC<CR>
 nnoremap <C-o> :FZF<CR>
 
-if has('autocmd')
-    augroup vimrc
-        au!
-        au BufWritePost $MYVIMRC so %
-    augroup END
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+
+" vim-airline configuration
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1
+let g:airline_theme='violet'
+
+" coloscheme
+" Range:   233 (darkest) ~ 238 (lightest)
+" Default: 235
+colorscheme space_vim_theme
+set background=dark
+let g:space_vim_italic = 1
+let g:space_vim_italicize_strings = 1
+
+" indentLine
+let g:indentLine_setColors = 0
+
+" vim-racer
+let g:racer_experimental_completer = 1
+let g:racer_insert_paren = 1
+au FileType rust nmap gd <Plug>(rust-def)
+au FileType rust nmap gs <Plug>(rust-def-split)
+au FileType rust nmap gx <Plug>(rust-def-vertical)
+au FileType rust nmap <leader>gd <Plug>(rust-doc)
+
+" shougo <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" deoplete-jedi
+let g:deoplete#sources#jedi#show_docstring = 1
+
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading\ -S
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
-if has('macunix')
-    let g:ycm_server_python_interpreter = '/usr/local/bin/python2'
-else
-    let g:ycm_server_python_interpreter = '/usr/bin/python2'
-endif
+" substitute helper
+set inccommand=split
 
-let g:ycm_global_ycm_extra_conf = '~/.config/nvim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+" gutentags
+
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+" change focus to quickfix window after search (optional).
+let g:gutentags_plus_switch = 1
+
+let g:gutentags_define_advanced_commands = 1
+
+" vim-preview
+autocmd FileType qf nnoremap <silent><buffer> p :PreviewQuickfix<cr>
+autocmd FileType qf nnoremap <silent><buffer> P :PreviewClose<cr>
+noremap <F4> :PreviewSignature!<cr>
+inoremap <F4> <c-\><c-o>:PreviewSignature!<cr>
